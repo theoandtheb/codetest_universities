@@ -10,37 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_04_235516) do
+ActiveRecord::Schema.define(version: 2021_10_04_235429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "domains", force: :cascade do |t|
-    t.string "domain"
-    t.bigint "university_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["university_id"], name: "index_domains_on_university_id"
-  end
 
   create_table "universities", force: :cascade do |t|
     t.string "name"
     t.string "country"
     t.string "alpha_two_code", limit: 2
     t.string "state_province"
+    t.string "domains", array: true
+    t.string "web_pages", array: true
+    t.boolean "multiple_domains", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["alpha_two_code"], name: "index_universities_on_alpha_two_code"
   end
 
-  create_table "web_pages", force: :cascade do |t|
-    t.string "web_page"
-    t.bigint "university_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["university_id"], name: "index_web_pages_on_university_id"
-  end
-
-  add_foreign_key "domains", "universities"
-  add_foreign_key "web_pages", "universities"
 end
