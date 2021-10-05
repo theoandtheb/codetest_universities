@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  database: codetest_universities_development
+  pool: 5
+  encoding: unicode
+
+development:
+  adapter: postgresql
+  database: codetest_universities_development
+  pool: 5
+  username:
+  password:
+
+production:
+  <<: *default
+  database: codetest_universities_production
+  username:
+  password: 
